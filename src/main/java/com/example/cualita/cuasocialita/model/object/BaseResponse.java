@@ -6,14 +6,18 @@ import lombok.Setter;
 @Setter
 @Getter
 public class BaseResponse<T> {
-    private Boolean status;
-    private Integer code;
-    private String message;
-    private T data;
+    private Boolean status = false;
+    private String code = "500";
+    private String message = "Internal Server Error";
+    private T data = null;
 
-    public BaseResponse(Boolean status, Integer code, String message, T data){
+    public BaseResponse(){
+
+    }
+
+    public BaseResponse(Boolean status, String i, String message, T data){
         this.status = status;
-        this.code = code;
+        this.code = i;
         this.message = message;
         this.data = data;
     }
