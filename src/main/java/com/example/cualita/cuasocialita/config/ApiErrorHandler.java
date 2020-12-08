@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
@@ -42,21 +41,6 @@ public class ApiErrorHandler {
     
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public @ResponseBody ResponseEntity<Object> handleMissingServletRequestParameterException(Exception ex){
-        BaseResponse<Object> response = new BaseResponse<>();
-
-        response.setStatus(false);
-        response.setMessage("Internal Server Error");
-        response.setCode("417");
-        response.setMessage(ex.getMessage());
-
-        return new ResponseEntity<>(
-            response,
-            HttpStatus.EXPECTATION_FAILED
-        );
-    }
-
-    @ExceptionHandler (MissingServletRequestPartException.class)
-    public @ResponseBody ResponseEntity<Object> handleMissingServletRequestPartException(Exception ex){
         BaseResponse<Object> response = new BaseResponse<>();
 
         response.setStatus(false);
