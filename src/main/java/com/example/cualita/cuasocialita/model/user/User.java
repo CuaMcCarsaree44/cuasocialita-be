@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Getter;
@@ -29,27 +31,33 @@ public class User {
     )
     private UUID id;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30, unique = true)
     private String username;
 
 
-    @Column(nullable = false, length = 80)
+    @Column(nullable = false, length = 80, unique = true)
     private String email;
 
+    @JsonIgnore
     @Lob
     @Column(nullable = false)
     private String password;
     
+    @JsonIgnore
     @Lob
     private String fcmToken;
 
     @Column(nullable = false)
     private Integer status = 0;
 
+    @JsonIgnore
     @Column(nullable = false)
     private OffsetDateTime createdAt = OffsetDateTime.now();
+    
+    @JsonIgnore
     private OffsetDateTime updatedAt = OffsetDateTime.now();
 
+    @JsonIgnore
     private OffsetDateTime deletedAt;
 
     public User(){
